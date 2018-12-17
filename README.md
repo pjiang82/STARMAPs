@@ -15,7 +15,7 @@ tbl <- summary.starmaps(res)
 
 Two additional examples are provided in the file "Usage_Examples.R".
 
-Note that, by default, STARMAPs expects taxon names that uses ";" to seperate each taxonomic level beginning Phylum (see get.taxa() function in "STARMAPs_v1.R").
+Note that, by default, STARMAPs expects taxon names that uses ";" to seperate each taxonomic level beginning with Phylum (see get.taxa() function in "STARMAPs_v1.R").
 
 # Benchmarking
 Codes and results of benchmarking evaluation of STARMAPs, as described in Jiang et al (citation below), is provided in the "Benchmarking_Evaluations.zip" file.
