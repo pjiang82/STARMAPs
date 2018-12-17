@@ -12,7 +12,9 @@ res <- starmaps(data1, meta1, fcol1, data2, meta2, fcol2)
 plot.starmaps(res, "res.pdf")
 tbl <- summary.starmaps(res)
 ~~~
-Two additional examples are provided in the file "Usage_Examples.R"
+
+Two additional examples are provided in the file "Usage_Examples.R".
+
 Note that, by default, STARMAPs expects taxon names that uses ";" to seperate each taxonomic level beginning Phylum (see get.taxa() function in "STARMAPs_v1.R").
 
 # Benchmarking
