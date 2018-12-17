@@ -16,13 +16,13 @@ Peng Jiang (peng.jiang@northwestern.edu)
 Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH (submitted) Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight.
 
 # Required packages
-MCMCpack
-vegan
-compositions
-ggplot2
-gridExtra
-parallel
+- MCMCpack
+- vegan
+- compositions
+- ggplot2
+- gridExtra
+- parallel
 
-Benchmarking, also used
-phyloseq
-plotROC
+Benchmarking also used
+- phyloseq
+- plotROC
