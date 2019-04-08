@@ -2,12 +2,12 @@
 STARMAPs is a statistical tool for a comparison between two microbiota datasets. It provides inference for alike and opposite matchings of the microbial changes associated with treatments/factors in two different datasets. 
 
 # Implementation
-STARMAPs is currently implemented as an R source file ("STARMAPs_v1.R"). We are currently working to develop it into an R package.
+STARMAPs is currently implemented as an R source file ("STARMAPs_v2.R"). We are currently working to develop it into an R package.
 
 # Usage
 In general, use the following for two datasets with taxon-by-sample count matrices data1 and data2 with meta data files meta1 and meta2 with matching sample ids. Names of the columns in the meta files that specify the groups to compare need to be provided to fcol1 and fcol2.
 ~~~
-source("STARMAPs_v1.R")
+source("STARMAPs_v2.R")
 res <- starmaps(data1, meta1, fcol1, data2, meta2, fcol2)
 plot.starmaps(res, "res.pdf")
 tbl <- summary.starmaps(res)
