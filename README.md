@@ -24,7 +24,7 @@ Codes and results of benchmarking evaluation of STARMAPs, as described in Jiang 
 Peng Jiang (peng.jiang@northwestern.edu)
 
 # Citation: 
-Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH (submitted) Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight.
+Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH. Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019 Aug 9;7(1):113. doi: 10.1186/s40168-019-0724-4
 
 # Required packages
 - MCMCpack
