@@ -8,7 +8,7 @@
 #### Includes three main functions: starmaps(), plot.starmaps(), and summary.starmaps()
 ####
 #### Author: Peng Jiang (peng.jiang@northwestern.edu)
-#### Reference: Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH (2019) Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019.
+#### Reference: Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH. Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019.Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH. Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019 Aug 9;7(1):113. doi: 10.1186/s40168-019-0724-4
 ####
 #### Last edited: 2019-03-28 
 ####
