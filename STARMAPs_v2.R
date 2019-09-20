@@ -441,7 +441,7 @@ summary.starmaps <- function(starmap){
 get.taxa <- function(counts, sep=";"){
   
   taxa <- rownames(counts)
-  lvs <- nchar(taxa) - nchar(gsub(";", "", taxa))
+  lvs <- nchar(taxa) - nchar(gsub(sep, "", taxa))
   lowLv <- max(lvs) + 1
   st <- lowLv - lvs
   sps <- sapply(st, function(s){
