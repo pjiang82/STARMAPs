@@ -37,7 +37,7 @@ library(gridExtra)
 ####             Can be NULL if the cond is numeric or a factor (or character) of 2 levels.
 ####             Note: For data1, providing the full set of cond1 and specifying sbst1 is prefered than providing subsetted data, as the former capture the full picture in PCA (i.e., PC loading would be different)
 ####             For data2, providing the full set of cond2 and specifying sbst2 is not different from providing subsetted data in the test, other than the figure.
-#### PCs:        A numeric vector speciflying the selected PC space for PERMANOVA; default: PC1 & PC2 
+#### PCs:        A numeric vector speciflying the selected PC space for PERMANOVA; default: all
 #### all.levels: TRUE/FALSE; whether to perform tests at higher taxonomic levels; 
 ####             if FALSE, only results at the input taxonomic level will be computed; default = TRUE   
 ####
