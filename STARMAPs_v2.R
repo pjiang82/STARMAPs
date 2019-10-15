@@ -33,11 +33,11 @@ library(gridExtra)
 #### mc:         Number of CPUs/threads allowed for multi-core processing, default = 1.
 #### nperm:      Number of permutation in PERMANOVA (both sample-wise and feture wise).
 #### nboot:      Number of bootstrap to test the similarity in the dirction of changes.
-#### sbst1/2:    A character vector with length of 2 to specifiy subsets of groups to be compared, when cond has more than 2 levels.
+#### sbst1/2:    A character vector with length of 2 to specify subsets of groups to be compared, when cond has more than 2 levels.
 ####             Can be NULL if the cond is numeric or a factor (or character) of 2 levels.
 ####             Note: For data1, providing the full set of cond1 and specifying sbst1 is prefered than providing subsetted data, as the former capture the full picture in PCA (i.e., PC loading would be different)
 ####             For data2, providing the full set of cond2 and specifying sbst2 is not different from providing subsetted data in the test, other than the figure.
-#### PCs:        A numeric vector speciflying the selected PC space for PERMANOVA; default: all
+#### PCs:        A numeric vector specifying the selected PC space for PERMANOVA; default: all
 #### all.levels: TRUE/FALSE; whether to perform tests at higher taxonomic levels; 
 ####             if FALSE, only results at the input taxonomic level will be computed; default = TRUE   
 ####
@@ -472,7 +472,7 @@ get.taxa <- function(counts, sep=";"){
 #### counts:  a matrix of counts with samples in columns and features in rows
 #### taxa:    a matrix of taxa with each of the levels seperated in columns and rows matching features in counts
 ####          expecting output style from get.taxa()
-#### lv:      a integer specifiying the taxonomic level to which the counts are aggregated
+#### lv:      a integer specifying the taxonomic level to which the counts are aggregated
 taxa.agg <- function(counts, taxa, lv = ncol(taxa)){
   counts <- as.data.frame(counts)
   counts$taxa <- apply(taxa[, 1:lv], 1, paste, collapse = ";")
