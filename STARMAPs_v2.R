@@ -221,7 +221,7 @@ starmaps <- function(data1, meta1, fcol1, data2, meta2, fcol2, mc = 1, nperm = 1
       fp.F <- sapply(1:nperm, fperm.adonis2, ilr = ilr2, V = svd1$v, sel = sel2, PCs = PCspace, cond = cond2_)
     }
     
-    fp.P <- sum(fp.F > aov.tbl2[1, 4])/(1 + nperm)
+    fp.P <- mean(fp.F > aov.tbl2[1, 4])
     
     aov.tbl2[,"fp.Pr(>F)"] <- c(fp.P, NA, NA)
     names(aov.tbl2)[6] <- "sp.Pr(>F)"
