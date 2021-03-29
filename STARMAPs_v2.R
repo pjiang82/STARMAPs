@@ -440,10 +440,11 @@ summary.starmaps <- function(starmap){
 #### sep:     The character used to seperate each taxonomic level
 get.taxa <- function(counts, sep=";"){
   
+  sep1 <- paste0("[", sep, "]") # to accommodate special characters
   taxa <- rownames(counts)
-  lvs <- nchar(taxa) - nchar(gsub(sep, "", taxa))
+  lvs <- nchar(taxa) - nchar(gsub(sep1, "", taxa))
   lowLv <- max(lvs) + 1
-  st <- lowLv - lvs
+  st <-  max(lvs) - lvs
   sps <- sapply(st, function(s){
     sp <- rep(sep, s)
     sp <- paste(sp, collapse = "")
@@ -451,7 +452,7 @@ get.taxa <- function(counts, sep=";"){
   
   taxa <- paste0(taxa, sps)
   
-  taxa <- do.call(rbind, strsplit(taxa, sep))
+  taxa <- do.call(rbind, strsplit(taxa, sep1))
   
   taxa <- gsub(" ", "", taxa)
   taxa <- gsub(".*__", "", taxa)
@@ -459,7 +460,7 @@ get.taxa <- function(counts, sep=";"){
   taxa <- gsub("]", "", taxa)
   taxa <- gsub("[.].*", "", taxa)
   taxa[which(taxa == "")] <- "Other"
-
+  
   colnames(taxa) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")[1:lowLv]
   
   return(taxa)
