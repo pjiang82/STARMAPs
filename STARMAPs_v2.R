@@ -1,5 +1,5 @@
 ##########################################
-#### STARMAPs v2.0
+#### STARMAPs v2.1
 #### 
 #### Performs a comparison between two microbiota datasets
 #### Linking the microbial changes associated with different treatments/factors in two datasets based on Princpal Component Analysis
@@ -8,9 +8,9 @@
 #### Includes three main functions: starmaps(), plot.starmaps(), and summary.starmaps()
 ####
 #### Author: Peng Jiang (peng.jiang@northwestern.edu)
-#### Reference: Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH. Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019.Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH. Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019 Aug 9;7(1):113. doi: 10.1186/s40168-019-0724-4
+#### Reference: Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH. Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019 Aug 9;7(1):113. doi: 10.1186/s40168-019-0724-4
 ####
-#### Last edited: 2019-03-28 
+#### Last edited: 2021-06-28 
 ####
 ##########################################
 
@@ -268,7 +268,7 @@ starmaps <- function(data1, meta1, fcol1, data2, meta2, fcol2, mc = 1, nperm = 1
 #### Arguments:
 #### starmap:    The output object from the starmaps function.
 #### pc.plane:   The PC plane to plot; default: PC1 & PC2; currently the graph is 2D only.
-#### pdf:        Name and path of the figure output file (pdf).
+#### pdf.out:    Name and path of the figure output file in PDF.
 #### col1/col2:  A vector of colors mapped to experimental groups (pass to scale_colour_manual()).
 ####             If the experimental condition/factor is numeric, col1/col2 can be used to specify n-color gradient.
 #### pch1/pch2:  Plotting character/symbol to use (same as pch in points{graphics}).
@@ -288,7 +288,7 @@ starmaps <- function(data1, meta1, fcol1, data2, meta2, fcol2, mc = 1, nperm = 1
 ####                         cos.theta:     cosine of the angel between the directions of changes in two datasets.
 ####                                        cos.theta = 1, exact same direction; = -1 exact opposite direction; 0, perpendicular
 ####                         P:             Bootstrap-determined P value of cos.theta != 0  
-plot.starmaps <- function(starmap, pdf = "starmaps.pdf", pc.plane = c(1, 2),
+plot.starmaps <- function(starmap, pc.plane = c(1, 2), pdf.out = NULL,
                           col1 = NULL, pch1 = 21, cex1 = 2, col2 = NULL, pch2 = 18, cex2 = 3, alpha = 0.3){
   
   levels <- names(starmap)[-1]
@@ -299,7 +299,8 @@ plot.starmaps <- function(starmap, pdf = "starmaps.pdf", pc.plane = c(1, 2),
   cond1.name <- starmap$metadata$cond1.name
   cond2.name <- starmap$metadata$cond2.name
   
-  pdf(pdf, width = 7.5, height = 5.7)
+  if(!is.null(pdf.out))
+     pdf(pdf.out, width = 7.5, height = 5.7)
   
   for(lv in levels){
     
@@ -378,7 +379,7 @@ plot.starmaps <- function(starmap, pdf = "starmaps.pdf", pc.plane = c(1, 2),
     
   }# loop through taxa levels
   
-  dev.off()
+  if(!is.null(pdf.out)) dev.off()
 }
 
 
