@@ -30,6 +30,7 @@ library(gridExtra)
 #### meta1/2:    A data.frame containing experimental conditions in columns, samples in rows matching samples in data1/data2.
 ####             Experimental conditions can be either factor/character or integer/numeric.
 #### fcol1/2:    A character giving the name of the column in meta1/meta2 that specifies the experimental factor of interest.
+#### offset1/2:  The offset values to be provided in ilr transformation to avoid log0, default = 0.5 for count data.
 #### mc:         Number of CPUs/threads allowed for multi-core processing, default = 1.
 #### nperm:      Number of permutation in PERMANOVA (both sample-wise and feture wise).
 #### nboot:      Number of bootstrap to test the similarity in the dirction of changes.
@@ -58,8 +59,9 @@ library(gridExtra)
 ####                                    cos.theta:     cosine of the angel between the directions of changes in two datasets.
 ####                                                   cos.theta = 1, exact same direction; = -1 exact opposite direction; 0, perpendicular
 ####                                    P:             Bootstrap-determined P value of cos.theta != 0             
-starmaps <- function(data1, meta1, fcol1, data2, meta2, fcol2, mc = 1, nperm = 1000, nboot = nperm,
-                  PCs = NULL, sbst1 = NULL, sbst2 = NULL, all.levels = TRUE){
+starmaps <- function(data1, meta1, fcol1, data2, meta2, fcol2, offset1 = 0.5, offset2 = 0.5,
+                     mc = 1, nperm = 1000, nboot = nperm,
+                     PCs = NULL, sbst1 = NULL, sbst2 = NULL, all.levels = TRUE){
   
   cond1 <- meta1[, fcol1]
   cond2 <- meta2[, fcol2]
@@ -152,8 +154,8 @@ starmaps <- function(data1, meta1, fcol1, data2, meta2, fcol2, mc = 1, nperm = 1
     output[[LVi]][["counts2"]] <- data2.i
     
     ## ilr
-    ilr1 <- apply(data1.i, 2, PCilr)
-    ilr2 <- apply(data2.i, 2, PCilr)
+    ilr1 <- apply(data1.i, 2, PCilr, offset = offset1)
+    ilr2 <- apply(data2.i, 2, PCilr, offset = offset2)
     
     output[[LVi]][["ilr1"]] <- ilr1
     output[[LVi]][["ilr2"]] <- ilr2
@@ -552,10 +554,10 @@ match.taxa <- function(taxa1, taxa2){
 #### dmc:  Number of Dirichlet Monte Carlo incidences
 #### V:    A matrix, with columns giving the chosen basis of the clr-plane
 ####       By default, provided by compositions::ilrBase(D, "balanced"), where D is the number of features in x.
-PCilr <- function(x, dmc = 1000, V = NULL){
+PCilr <- function(x, offset = 0.5, dmc = 1000, V = NULL){
   
   ### draw from Dirichlet distribution and get a point estimate, thus avioding constant 0s
-  x <- x + 0.5
+  x <- x + offset
   dmc.x <- MCMCpack::rdirichlet(dmc, x)
   es <- colMeans(dmc.x)
   
