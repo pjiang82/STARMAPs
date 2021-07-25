@@ -459,7 +459,6 @@ get.taxa <- function(counts, sep=";"){
   taxa <- gsub(".*__", "", taxa)
   taxa <- gsub("[[]", "", taxa)
   taxa <- gsub("]", "", taxa)
-  taxa <- gsub("[.].*", "", taxa)
   taxa[which(taxa == "")] <- "Other"
   
   colnames(taxa) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")[1:lowLv]
