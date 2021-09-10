@@ -10,7 +10,7 @@
 #### Author: Peng Jiang (peng.jiang@northwestern.edu)
 #### Reference: Jiang P, Green SJ, Chlipala GE, Turek FW, Vitaterna MH. Reproducible changes in the gut microbiome reveal a shift in microbial and host metabolism during spaceflight. Microbiome. 2019 Aug 9;7(1):113. doi: 10.1186/s40168-019-0724-4
 ####
-#### Last edited: 2021-06-28 
+#### Last edited: 2021-09-10 
 ####
 ##########################################
 
@@ -152,8 +152,8 @@ starmaps <- function(data1, meta1, fcol1, data2, meta2, fcol2, mc = 1, nperm = 1
     output[[LVi]][["counts2"]] <- data2.i
     
     ## ilr
-    ilr1 <- apply(data1.i, 2, PCilr)
-    ilr2 <- apply(data2.i, 2, PCilr)
+    ilr1 <- PCilr(data1.i)
+    ilr2 <- PCilr(data2.i)
     
     output[[LVi]][["ilr1"]] <- ilr1
     output[[LVi]][["ilr2"]] <- ilr2
@@ -544,23 +544,27 @@ match.taxa <- function(taxa1, taxa2){
 }
 
 
-#### PCilr: A function to perform isometric log-ratio transformation in perperation for PCA
+#### PCilr: A function to perform isometric log-ratio transformation in preparation for PCA
 ####
 #### Arguments:
-#### x:    A vector of feature counts of a sample
+#### x:    A matrix of feature counts of a sample
 #### dmc:  Number of Dirichlet Monte Carlo incidences
 #### V:    A matrix, with columns giving the chosen basis of the clr-plane
 ####       By default, provided by compositions::ilrBase(D, "balanced"), where D is the number of features in x.
 PCilr <- function(x, dmc = 1000, V = NULL){
   
-  ### draw from Dirichlet distribution and get a point estimate, thus avioding constant 0s
+  ### draw from Dirichlet distribution and get a point estimate, thus avoiding constant 0s
   x <- x + 0.5
-  dmc.x <- MCMCpack::rdirichlet(dmc, x)
-  es <- colMeans(dmc.x)
+  es <- apply(x, 2, function(y){
+    dmc.y <- MCMCpack::rdirichlet(dmc, y)
+    es.y <- colMeans(dmc.y)
+    return(es.y)
+  })
   
   ### ilr
-  if (is.null(V)) V <- compositions::ilrBase(D = length(es), "balanced")
-  ilr.x <- compositions::ilr(es , V = V)
+  if (is.null(V)) V <- compositions::ilrBase(D = nrow(es), "balanced")
+  ilr.x <- compositions::ilr(t(es) , V = V)
+  ilr.x <- t(as.data.frame(ilr.x))
   
   return(ilr.x)
 }
